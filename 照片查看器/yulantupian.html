@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>photofangda</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    .box{
+        width: 650px;
+        height: auto;
+        background: black;
+        position: absolute;
+        top:10px;
+        left: 0;
+        right: 0;
+        margin:0 auto 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 8px;
+
+    }
+    .box>li{
+        width: 150px;
+        height: 100px;
+        float:left;
+        border:5px solid black;
+    }
+    .box>li>img{
+        width: 100%;
+        height: 100%;
+    }
+    .fangda{
+        width: 600px;
+        height: 400px;
+        position: absolute;
+        top:0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin:auto auto 100px;
+        box-shadow: 0 0 0 0 rgba(0,0,0,0.8);
+        transform: scale(0,0);
+        transition: all 0.6s;
+    }
+    .chuxian{
+        transform: scale(1,1);
+        box-shadow: 0 0 0 500px rgba(0,0,0,0.3);
+    }
+    .fangda>img{
+        width: 100%;
+        height: 100%;
+    }
+    .guanbi{
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        position: absolute;
+        top:-30px;
+        right: -30px;
+        border-top:30px solid white;
+        border-bottom:30px solid white;
+        border-left:30px solid black;
+        border-right:30px solid black;
+        z-index: 999999;
+    }
+    .but-l,.but-r{
+        width: 0;
+        height: 0;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        margin:auto;
+        border-top:30px solid transparent;
+        border-bottom:30px solid transparent;
+    }
+    .but-r{
+        right:-70px;
+        border-left:30px solid orange;
+        border-right:30px solid transparent;
+    }
+    .but-l{
+        left:-70px;
+        border-left:30px solid transparent;
+        border-right:30px solid orange;
+    }
+    .fangda1{
+        width: 600px;
+        height: 400px;
+        position: absolute;
+        top:0;
+        left: 0;
+        overflow: hidden;
+    }
+    .fangda1>ul{
+        width: 600px;
+        height:400px;
+        /* overflow: hidden; */
+        position: absolute;
+        top:0;
+        left: 0;
+
+    }
+    .fangda1>ul>li:first-child{
+        width: 600px;
+        height:400px;
+        position: absolute;
+        left: -600px;
+        background: red;
+         font-size: 90px;
+    }
+    .fangda1>ul>li:nth-child(2){
+        width: 600px;
+        height:400px;
+        position: absolute;
+        left: 0;
+        background: yellow;
+         font-size: 90px;
+    }
+    .fangda1>ul>li:nth-child(3){
+        width: 600px;
+        height:400px;
+        position: absolute;
+        left: 600px;
+        background: blue;
+         font-size: 90px;
+         /* color: white; */
+    }
+
+    .fangda1>ul>li>img{
+        width: 100%;
+        height: 100%;
+    }
+    .liebiao{
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        top: 410px;
+        left: 0;
+        overflow: hidden;
+    }
+    .liebiao>ul{
+        width: 1050px;
+        height: auto;
+    }
+    .liebiao>ul>li{
+        width: 75px;
+        height: 50px;
+        box-sizing: border-box;
+        border: 1px solid white;
+        float: left;
+    }
+    .liebiao>ul>li>img{
+        width: 100%;
+        height: 100%;
+        
+    }
+
+
+</style>
+<body>
+    <p>ghfbfcbfgbfnbfggnv的v都不v大部分的狗</p>
+    <ul class="box">
+        <li><img src="img/timg1.jpg" alt=""></li>
+        <li><img src="img/timg2.jpg" alt=""></li>
+        <li><img src="img/timg3.jpg" alt=""></li>
+        <li><img src="img/timg4.jpg" alt=""></li>
+        <li><img src="img/timg5.jpg" alt=""></li>
+        <li><img src="img/timg6.jpg" alt=""></li>
+        <li><img src="img/timg7.jpg" alt=""></li>
+        <li><img src="img/timg8.jpg" alt=""></li>
+        <li><img src="img/timg9.jpg" alt=""></li>
+        <li><img src="img/timg10.jpg" alt=""></li>
+        <li><img src="img/timg11.jpg" alt=""></li>
+        <li><img src="img/timg12.jpg" alt=""></li>
+        <li><img src="img/timg13.jpg" alt=""></li>
+        <li><img src="img/timg14.jpg" alt=""></li>
+    </ul>
+    <div class="fangda">
+        <div class="fangda1">
+            <ul>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+            </ul>
+        </div>
+        <div class="guanbi"></div>
+        <div class="but-l"></div>
+        <div class="but-r"></div>
+        <div class="liebiao">
+            <ul>
+                <li><img src="img/timg1.jpg" alt=""></li>
+                <li><img src="img/timg2.jpg" alt=""></li>
+                <li><img src="img/timg3.jpg" alt=""></li>
+                <li><img src="img/timg4.jpg" alt=""></li>
+                <li><img src="img/timg5.jpg" alt=""></li>
+                <li><img src="img/timg6.jpg" alt=""></li>
+                <li><img src="img/timg7.jpg" alt=""></li>
+                <li><img src="img/timg8.jpg" alt=""></li>
+                <li><img src="img/timg9.jpg" alt=""></li>
+                <li><img src="img/timg10.jpg" alt=""></li>
+                <li><img src="img/timg11.jpg" alt=""></li>
+                <li><img src="img/timg12.jpg" alt=""></li>
+                <li><img src="img/timg13.jpg" alt=""></li>
+                <li><img src="img/timg14.jpg" alt=""></li>
+            </ul>   
+        </div>
+    </div>
+</body>
+</html>
+<script src="jquery-3.2.1.js"></script>
+<script>
+        var now=1;
+        var next=2;
+        var last=0;
+        var num=0;
+    $(function () {
+        let list=$('.box>li');
+        let fangda=$('.fangda');
+        let guanbi=$('.guanbi');
+        let yidong=$('.fangda1>ul');
+        let lun=$('.fangda1>ul>li');
+        let btnleft=$('.but-l');
+        let btnright=$('.but-r');
+        let liebiao=$('.liebiao>ul>li');
+        let img;
+        let indexnum;
+        var dog=false;
+        console.log(lun[1]);
+        console.log(lun.eq(1));
+
+        
+        guanbi.on('click',function () {
+            fangda.removeClass('chuxian');
+        });
+        list.on('click',function () {
+            img=$('img',this).prop('src');
+            $('.fangda1>ul>li>img')[now].src=img;
+            fangda.addClass('chuxian');
+            indexnum=$(this).index();
+            for(let i=0;i<liebiao.length;i++){
+                liebiao.eq(i).css({"border":"1px solid white"});
+            }
+            liebiao.eq(indexnum).css({"border":"5px solid black"});
+        });
+        liebiao.on('click',function () {
+            img=$('img',this).prop('src');
+            $('.fangda1>ul>li>img')[now].src=img;
+            indexnum=$(this).index();
+            for(let i=0;i<liebiao.length;i++){
+                liebiao.eq(i).css({"border":"1px solid white"});
+            }
+            liebiao.eq(indexnum).css({"border":"5px solid black"});
+        });
+        btnright.on('click',function () {
+            if(!dog){
+                
+           
+                if(indexnum>liebiao.length-2){
+                    indexnum=-1;
+                }
+                for(let i=0;i<liebiao.length;i++){
+                    liebiao.eq(i).css({"border":"1px solid white"});
+                }           
+                liebiao.eq(indexnum+1).css({"border":"5px solid black"});
+                $('.fangda1>ul>li>img')[next].src=$('img',".box").eq(indexnum+1).prop('src');
+                lun.eq(next).animate({left:"0"});
+                
+                lun.eq(now).animate({left:"-600px"},function(){
+                    lun.eq(now).css({ "left": "600px"});
+                    num=next;
+                    next=now;
+                    now=num;
+                    dog=false;
+                });
+                
+                indexnum++;
+                
+                aa(); 
+            }
+       })
+        btnleft.on('click',function () {
+            if(!dog){
+            
+                if(indexnum==0){
+                    indexnum=liebiao.length;
+                }
+                for(let i=0;i<liebiao.length;i++){
+                    liebiao.eq(i).css({"border":"1px solid white"});
+                }
+                liebiao.eq(indexnum-1).css({"border":"5px solid black"});
+                $('.fangda1>ul>li>img')[last].src=$('img',".box").eq(indexnum-1).prop('src');
+                lun.eq(last).animate({left:"0"});
+                lun.eq(now).animate({left:"600px"},function(){
+                    lun.eq(now).css({ "left": "-600px"});
+                    num=last;
+                    last=now;
+                    now=num;
+                    dog=false;
+                }); 
+                indexnum--;           
+                aa();
+            }
+        })
+        function aa(){
+            if(indexnum % 8==0 && indexnum!=0 || indexnum==liebiao.length-1){
+                $('.liebiao>ul').animate({marginLeft:"-600px"});
+            console.log(77777777);
+            
+            }else if(indexnum <8){
+                $('.liebiao>ul').animate({marginLeft:"0"});
+            }
+            dog=true;
+        }       
+    })
+    console.log(Math.random());
+</script>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉导航</title>
+	<script src="animate.js"></script>
+</head>
+
+<style>
+
+ 	*{
+ 		margin: 0;
+ 		padding: 0;
+ 		list-style: none;
+ 	}
+	.box{
+		width: 600px;
+		height: 50px;
+		margin: 0 auto;
+		background: red;
+		display: flex;
+		margin-top:10px;
+	}
+	.lanmu{
+
+		width: 150px;
+		height: 50px;
+		text-align: center;
+		line-height: 50px;
+		font-size: 20px;
+		background: #ccc;
+		font-weight: bold;
+		position: relative;
+		cursor: pointer;
+		border:1px solid #000;
+		box-sizing: border-box;
+
+	}
+
+
+
+	.lanmu:nth-child(1):hover{
+         background: #ccc;
+	}
+
+	
+
+	.content{
+         
+         position: absolute;
+         left: 0;
+         top:100%;
+         width: 100%;
+        
+         
+         box-shadow: 0 2px 5px #666;
+
+         box-sizing: border-box;
+
+         overflow: hidden;
+
+	} 
+
+	.list{
+
+		width: 100%;
+		height: 40px;
+		border-top:1px solid #999; 
+		border-bottom:1px solid #999;
+		box-sizing: border-box;
+		cursor: pointer;
+	} 
+	.list:first-child{
+		border-top: 2px solid #999;
+	} 
+
+
+	
+
+	.list:hover{
+		background: yellow;
+	} 
+
+</style>
+
+
+
+<body>
+
+	<div class="box">
+
+		<ul class="lanmu">
+	          首页
+	          <li   class="content">
+				          
+	          </li>
+		</ul>
+
+		<ul class="lanmu">
+	           一
+	           <li  class="content">
+                  <div class="list">栏目1</div>
+				  <div class="list">栏目2</div> 
+				  <div class="list">栏目3</div> 
+	           </li>
+		</ul>
+
+		<ul class="lanmu">
+	           二
+	           <li  class="content">
+				  <div class="list">栏目1</div> 
+				  <div class="list">栏目2</div> 
+				  <div class="list">栏目3</div> 
+				  <div class="list">栏目4</div> 
+                   
+	           </li>
+		</ul>
+
+		<ul class="lanmu">
+		        三
+		        <li  class="content">
+                  <div class="list">栏目1</div> 
+				  <div class="list">栏目2</div> 
+				  <div class="list">栏目3</div> 
+				  <div class="list">栏目4</div> 
+				  <div class="list">栏目5</div> 
+		        </li>
+		</ul>
+
+
+	</div>
+
+
+</body>
+</html>
+
+<script>
+
+ 	var  lanmu=document.getElementsByClassName('lanmu');
+ 	var  content=document.getElementsByClassName('content');
+
+ 	for(let i=0;i<content.length;i++){
+		content[i].style.height=0;
+
+ 	}
+
+ 	for(let i=0;i<lanmu.length;i++){
+        
+        if(content[i].children.length!=0){
+
+        	 lanmu[i].onmouseover=function(){
+
+                    lanmu[i].style.background="yellow";
+    	 	 		animate(content[i],{height:content[i].children.length*40} );
+        	 }
+
+        }
+       
+
+
+ 		 lanmu[i].onmouseout=function(){
+
+ 		 	lanmu[i].style.background="#ccc";
+         	animate(content[i],{height:0} );
+           
+ 		}
+
+ 		
+
+ 	}
+
+    
+</script>
+                   

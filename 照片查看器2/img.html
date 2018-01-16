@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片动画效果</title>
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/jquery-3.2.1.js"></script>
+</head>
+<style>
+    .box{
+        width: 660px;
+        height: 443px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+
+    }
+
+
+
+    ul>li{
+        width: 325px;
+        height: 216px;
+        float: left;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+    li>img{
+        width: 325px;
+        height: 216px;
+        display: block;
+    }
+
+    .scale{
+
+        width: 975px;
+        height: 648px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+
+        transition: all 0.5s;
+        transform: scale(0);
+
+    }
+
+    .scale>img{
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+    button{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        right: 0;
+        top:0;
+        background: #000;
+        border: 0;
+        opacity: 0.5;
+        color: red;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .scale>[class=btn-left],.scale>[class=btn-right]{
+        width: 60px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        top:calc(50% - 50px);
+        font-size: 40px;
+        line-height: 100px;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    .scale>[class=btn-left]{
+          left: -120px;
+      }
+
+    .scale>[class=btn-right]{
+        right: -120px;
+    }
+</style>
+<body>
+
+    <ul  class="box">
+        <li><img src="images/tea1.jpg" alt=""></li>
+        <li><img src="images/tea2.jpg" alt=""></li>
+        <li><img src="images/tea3.jpg" alt=""></li>
+        <li><img src="images/tea4.jpg" alt=""></li>
+    </ul>
+
+    <div class="scale">
+        <div class="btn-left"> < </div>
+        <div class="btn-right"> > </div>
+        <button>x</button>
+        <img src="images/tea1.jpg" alt="">
+    </div>
+
+
+
+</body>
+</html>
+
+<script>
+    $(function () {
+        /*获取元素*/
+        let li=$(".box>li");
+        let scale=$(".scale");
+        let button=$("button");
+        let btn_left=$(".btn-left");
+        let btn_right=$(".btn-right");
+        let index=0;
+        let w=$(".scale").width();
+
+
+        /*给box>li添加点击事件,点击哪一个，把他的img路径给scale下的img*/
+
+        li.on("click",function () {
+            /*获取点击那个的下标*/
+            index=$(this).index();
+//            /*第一种原生转jquery*/
+//            $(".scale>img")[0].src=$(this).children("img")[0].src;
+            /*第二种用pop属性*/
+            let img=$("img",this).prop("src");
+            $(".scale>img").prop("src",img);
+            scale.css({transform:" scale(1)", boxShadow: "0 0 10px 1000px rgba(0,0,0,0.8)"});
+
+        })
+        /*点击按钮则关闭*/
+        button.on("click",function () {
+
+            scale.css({transform:" scale(0)"})
+
+        })
+
+        /*点击右边则首先下标加一，获取下一张的下标，然后把该下标下的img路径给 scale下的img*/
+        btn_right.on("click",function () {
+             index++;
+
+
+            if(index==li.length){
+                 index=0;
+            }
+
+             let img=li.eq(index).find("img").prop("src");
+             $(".scale>img").prop("src",img);
+
+        })
+
+        /*点击左边则首先下标减一，获取上一张的下标，然后把该下标下的img路径给 scale下的img*/
+        btn_left.on("click",function () {
+            index--;
+            if(index<0){
+                index=li.length-1;
+            }
+            let img=li.eq(index).find("img").prop("src");
+            $(".scale>img").prop("src",img);
+
+        })
+
+
+        /*事件委派*/
+        /*给页面中添加一个点击事件，把该事件委派给选择器类型为 .scale>img的元素*/
+        /*该事件为，如果鼠标到".scale>img"边框的距离大于他的一半的时候，触发 btn_right事件*/
+        $(document).on("click",".scale>img",function (e) {
+             if(e.offsetX>w/2){
+                 /*触发被选元素的指定事件类型，并且只会触发第一个元素*/
+                 btn_right.triggerHandler("click")
+             }else{
+
+                 btn_left.triggerHandler("click")
+             }
+        })
+
+    })
+</script>

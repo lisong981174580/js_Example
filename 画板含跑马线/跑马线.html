@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习</title>
+</head>
+<style>
+	#can{
+		background: #ccc;
+	}
+</style>
+<body>
+	<canvas  id="can"  width="800"  height="400"  ></canvas>
+	
+</body>
+</html>
+<script>
+	var can=document.getElementById("can");
+	var tex=can.getContext("2d");
+	var offset=0;
+	function move () {
+
+        offset+=5;
+        tex.clearRect(0,0,can.offsetWidth,can.offsetHeight);
+        tex.lineWidth=5;
+		tex.strokeStyle="red";
+		tex.lineDashOffset=offset;
+		tex.setLineDash([40,5]);
+	    tex.strokeRect(100,50,300,300);
+	}
+
+	var t=setInterval(move,50);
+	
+
+</script>

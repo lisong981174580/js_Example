@@ -1,0 +1,23 @@
+body{
+	height: 3000px;
+}
+.box{
+
+	width: 200px;
+	height: 200px;
+	background: red;
+	position:fixed;
+}
+
+.close{
+	width: 40px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color:#fff;
+	background: black;
+    position: absolute;
+    right:0;
+    bottom:0;
+    cursor: pointer;//出现小手
+}

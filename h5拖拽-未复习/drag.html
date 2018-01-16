@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+<style>
+	.left{
+		float: left;
+	}
+	.right{
+		float: right;
+	}
+	.box{
+		width: 500px;
+		height: 500px;
+		border: 1px solid #000;
+	}
+	input{
+		width: 100px;
+		height: 50px;
+	}
+	.item{
+		width: 120px;
+		height: 120px;
+		color: #fff;
+		text-align: center;
+		line-height: 110px;
+		font-size: 20px;
+		margin: 20px ;
+		margin-right: 0;
+		margin-bottom: 0;
+		float: left;
+	}
+	.left .item{
+		background: red;
+	}
+	.right .item{
+		background: green;
+	}
+</style>
+<body>
+	<div class="left">
+		<input type="button" value="add">
+		<div class="box">
+			<div class="item" draggable="true">1</div>
+			<div class="item" draggable="true">2</div>
+			<div class="item" draggable="true">3</div>
+			<div class="item" draggable="true">4</div>
+		</div>
+	</div> 
+	<div class="right">
+		<input type="button" value="add">
+		<div class="box">	
+		</div>
+	</div> 
+</body>
+</html>
+<script>
+	var l_box=document.querySelector(".left .box");
+	var r_box=document.querySelector(".right .box");
+	var target;
+	l_box.addEventListener("dragstart",function(ev){
+		target=ev.target;
+		target.style.background="#444";
+	})
+
+	r_box.addEventListener("dragover",function(ev){
+		ev.preventDefault();
+		this.style.background="#ddd";
+	})
+
+	r_box.addEventListener("drop",function(){
+		this.appendChild(target);
+		target.removeAttribute("style");
+		this.removeAttribute("style");
+	})
+
+	r_box.addEventListener("dragenter",function(){
+		this.style.background="#ddd";
+	})
+	r_box.addEventListener("dragleave",function(){
+		this.removeAttribute("style");
+	})
+
+
+	r_box.addEventListener("dragstart",function(ev){
+		target=ev.target;
+		target.style.background="#444";
+	})
+	l_box.addEventListener("dragover",function(ev){
+		ev.preventDefault();
+	})
+	l_box.addEventListener("drop",function(){
+		this.appendChild(target);
+		target.removeAttribute("style");
+		this.removeAttribute("style");
+	})
+	l_box.addEventListener("dragenter",function(){
+		this.style.background="#ddd";
+	})
+	l_box.addEventListener("dragleave",function(){
+		this.removeAttribute("style");
+
+	})
+
+
+
+	var l_add=document.querySelector(".left input");
+	var r_add=document.querySelector(".right input");
+	l_add.onclick=function(){
+		var div=document.createElement("div");
+		div.classList.add("item");
+		div.draggable="true";
+		l_box.appendChild(div);
+	}
+	r_add.onclick=function(){
+		var div=document.createElement("div");
+		div.classList.add("item");
+		div.draggable="true";
+		r_box.appendChild(div);
+	}
+</script>

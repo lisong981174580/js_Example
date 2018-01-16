@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<style>
+    #can{
+        background: #ccc;
+    }
+</style>
+<script>
+    window.onload=function(){
+//       获取canvas标签，dom对象
+        var can=document.querySelector("#can");
+//        获取绘图环境：getContext,2d环境
+        var ctx=can.getContext("2d");
+
+        //修改颜色样式
+        ctx.fillStyle="green";
+        //画矩形  四个点， fillRect(起点坐标x,y，宽，高)
+        ctx.fillRect(0,0,100,100);
+
+         //修改颜色样式
+        ctx.fillStyle="red";
+        //四个点， fillRect(起点坐标x,y，宽，高)
+        ctx.fillRect(100,100,100,100);
+       
+         //修改边框颜色样式    
+        ctx.strokeStyle="#000";
+        //画描边矩形 四个点， strokeRect(起点坐标x,y，宽，高)    为了使边框是1像素 所以给横竖坐标都加 0.5
+        ctx.strokeRect(200.5,200.5,100,100);
+         
+         // 清除矩形区域
+        // ctx.clearRect(0,0,300,300);
+
+
+    }
+</script>
+<body>
+    <canvas id="can" width="400" height="400" >
+       你的浏览器版本太低，请升级
+    </canvas>
+</body>
+</html>
+<!-- 
+<script>
+   canvas是h5新增的标签，API，绘制操作、形状、处理图片、实时视频；
+       canvas标签
+       width  height     默认宽高300*150
+       注意：（id，class,style,title）;
+       浏览器支持情况：IE6-8不支持canvas；
+
+   调整canvas宽度：
+   1.通过宽高属性
+   2.通过样式表的方式修改
+
+
+  绘制：
+  1、获取到绘图环境
+ ```
+        获取canvas标签，dom对象
+        var can=document.querySelector("#can");
+        获取绘图环境：getContext,2d环境
+ 		var ctx=can.getContext("2d");
+
+ ```
+ 2、绘图环境
+ -修改样式  颜色
+ ctx.fillStyle="#000";
+ ctx.fillStyle="red";
+ ctx.fillStyle="rgb(255,255,255)";
+ ctx.fillStyle="rgba(255,255,255,0.5)";
+
+ 3、绘制填充矩形
+ 圆点坐标在（0,0）点 ，右下 为正
+
+	//修改颜色样式
+		ctx.fillStyle="green";
+		//画矩形  四个点， fillRect(起点坐标x,y，宽，高)
+		ctx.fillRect(0,0,100,100);
+
+ 4、绘制描边矩形
+ 圆点坐标在（0,0）点 ，右下 为正
+    //修改边框颜色样式    
+        ctx.strokeStyle="#000";
+        //画描边矩形 四个点， strokeRect(起点坐标x,y，宽，高)    为了使边框是1像素 所以给横竖坐标都加 0.5
+        ctx.strokeRect(200.5,200.5,100,100);
+
+        浏览器不支持怎么办：
+         <canvas id="can" width="400" height="400" >
+            你的浏览器版本太低，请升级
+         </canvas>
+
+
+  5、清除矩形区域
+  ctx.clearRect(起点坐标x,y，宽，高);
+
+  6、绘制路径
+
+  fill()  填充当前绘图（路径）
+  stroke() 绘制已定义的路径
+  beginPath() 起始一条路径，或重置当前路径
+  moveTo() 把路径移动到画布中的指定点，不创建线条
+  closePath()  创建从当前点回到起始点的路径
+  lineTo()  添加一个断点，然后在画布中创建从改点到最后指定点的线条
+  clip() 从原始画布剪切任意形状和尺寸的区域
+  quadraticCurveTo(cp1x,cp1y,x,y)  创建一次贝塞尔曲线
+  bezierCurveTo(cp1x,cp1y,cp2x,cp2y，x,y)  创建二次贝塞尔曲线
+  arc()  创建弧/曲线（用于创建圆形或部分圆）
+  arcTo()  创建两切线之间的弧/曲线
+
+
+
+  绘制步骤：
+  1、开始新的路径的绘制 beginPath()
+  2、绘制所需要的路径
+  3、闭合路径closePath() 
+  4、对路径进行填充  或者  描边
+  fill()
+  stroke();
+
+
+  moveTo(x,y)   移动笔触
+  lineTo(x,y)  从当前点绘制一条直线路径 
+
+
+  绘制圆形 或圆弧
+  圆心、半径  角度(起始角度，终止角度)
+
+  arc(x,y,radius，starAngle，endAngle，anticlockwise)
+  starAngle  弧度
+  endAngle  弧度
+
+  圆的弧度  2*Math.PI
+  anticlockwise： false/true
+
+  arcTo()  创建两切线之间的弧/曲线
+
+
+  quadraticCurveTo(cp1x,cp1y,x,y)  创建一次贝塞尔曲线
+  bezierCurveTo(cp1x,cp1y,cp2x,cp2y，x,y)  创建二次贝塞尔曲线
+
+
+  5、透明度 
+   obj.globalAlpha=0-1；
+
+  6、线条修饰
+  lineWidth  调整线条的宽度
+
+  7、线条端点
+  lineCap 
+  butt    平
+  round   圆
+  square  方
+
+  8、lineJoin  两条线相交拐角类型
+
+  miter 默认，创建尖角
+  bevel  创建斜角
+  round 创建圆角
+
+  9、miterLimit   斜接长度   值为number  必需在有尖角的情况下使用    
+
+  10、方法  setLineDash([线长，间距])   使用虚线   接收的是数组
+      lineDashOffset属性  设置的起始偏移量
+
+  11、创建渐变  渐变是有大小的
+
+  线性渐变
+  createLinearGradient(x1,y1,x2,y2);  起点1为：x1,y1   起点2为：x2,y2
+
+  径向渐变
+  createRadialGradient(x1,y1,r1,x2,y2,r2)  6个参数   圆点1：x1,y1   半径r1    圆点2：x2,y2  半径r2 
+
+  添加渐变颜色
+  addColorStop(position,color)  两个参数  position为位置  必须为0-1之间的数    color为渐变的颜色
+ 
+   步骤：
+   1、创建渐变对象  var lg= createLinearGradient(x1,y1,x2,y2);
+   2、添加渐变颜色  lg.addColorStop(position,color);
+   3、使用渐变      tex.fillStyle=lg;
+
+
+  创建图片
+  var img=new Image();
+  img.src="1.jpg";
+
+  12、图案样式
+
+   创建图片
+  var img=new Image();
+  img.src="1.jpg";
+
+  createPattern(imge,type)  imge 是一个图片对象的引用     type是重复方式  repeat  no-repeat   repeat-x   repeat-y 
+
+  //阴影 css中） box-shadow:offx offy blur size color inset;
+  js中： 
+  shadowOffsetX    偏移量
+  shadowOffsetY
+  shadowBlur;  模糊程度
+  shadowColor;  颜色
+
+
+  13、gitImag
+
+ 画图工具
+
+1、新建画布  指定大小   指定背景色
+2、绘制形状
+线
+矩形
+圆形
+三角
+多边形
+多角形
+铅笔
+橡皮
+文字
+
+3、绘制方式
+填充  描边  描边+填充
+
+4、颜色  选择颜色
+<input type="color">
+
+5、截图保存，获取放入画布
+
+//getImageData(画布坐标x,y,宽，高)；
+//putImageData(图片数据对象，放在画布x,y,截图x,y,截图宽，高)；
+
+
+核心  绘制形状
+面向对象
+
+function palette(){
+    this.color
+    this.size
+    this.style='line | rect |...'
+    this.type='fill stroke'
+    this.ctx
+    this.width
+    this.height
+}
+
+palette.prototype.line=function(x1,y1,x2,y2){
+  
+}
+
+palette.prototype.rect=function(x1,y1,x2,y2){
+  
+}
+
+palette.prototype.circle=function(x1,y1,x2,y2){
+  
+}
+
+palette.prototype.ploy=function(x1,y1,x2,y2){
+  
+}
+ -->
+
+

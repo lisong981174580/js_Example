@@ -1,0 +1,8 @@
+.box > div {
+  margin-bottom: 20px;
+}
+img {
+  width: 100%;
+  display: block;
+  height: auto;
+}

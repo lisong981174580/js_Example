@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>画板函数</title>
+	<script  src="js/canvas.js"></script>
+</head>
+<body >
+	 <canvas id="canvas" width="1200" height="600" style="background: #ccc;"></canvas>
+</body>
+</html>
+
+<script>
+	var can;
+	var cxt; 
+	window.onload=function() {
+
+		can = document.getElementById("canvas");
+		cxt = can.getContext("2d");
+
+		//1、绘制矩形，rect(x,y,width,height,isClear,isFill,bgColor);
+		rect(0, 0, 200, 200, false, true, "green");
+
+		//2、绘制圆形  也可以画圆弧    这里用了个函数把弧度转化成度数了
+    	//circle(x, y, radius, startAngle, endAngle, anticlockwise, isOnlyArc, isFill, bgColor)
+		
+		circle(400,120,100,0,360,false,false,true,"rgba(255,0,0,0.5)");
+
+		// 3、绘制线段 line(startX, startY, endX, endY, lineWidth,bgColor)
+		line(600,20,900,200,1,"rgba(255,0,0,0.5)");
+        //4、画三角形
+		triangle(200,300,300,500,100,500,true,"red")
+  
+}  
+</script>

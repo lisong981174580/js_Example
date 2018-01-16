@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按需加载</title>
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/jquery-3.2.1.js"></script>
+</head>
+<style>
+    header,footer{
+        width: 100%;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        font-size: 30px;
+        background: #ccc;
+    }
+
+
+    .box{
+        width: 100%;
+        height: auto;
+        margin-bottom: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+    .box li{
+        width: 650px;
+        height: 443px;
+        margin: 30px 10px;;
+
+
+    }
+    .box li>img{
+        width: 650px;
+        height: 443px;
+        display: block;
+    }
+
+    .dingwei{
+        position: fixed;
+        width: 50px;
+        height: 250px;
+        left:30px;
+        top:calc(50% - 125px);
+    }
+
+    .dingwei li{
+        width: 100%;
+        height: 49px;
+        border-bottom: 1px solid #fff;
+        line-height: 48px;
+        text-align: center;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+<header>我是头部</header>
+<ul class="box" style="background: rebeccapurple">
+    <li><img jiasrc="images/tea1.jpg"  src="images/tea1.jpg" alt=""></li>
+    <li><img jiasrc="images/tea2.jpg"  src="images/tea1.jpg" alt=""></li>
+    <li><img jiasrc="images/tea3.jpg"  src="images/tea1.jpg" alt=""></li>
+    <li><img jiasrc="images/tea4.jpg"  src="images/tea1.jpg" alt=""></li>
+</ul>
+
+<ul class="box" style="background: yellow">
+    <li><img jiasrc="images/tea1.jpg" alt=""></li>
+    <li><img jiasrc="images/tea2.jpg" alt=""></li>
+    <li><img jiasrc="images/tea3.jpg" alt=""></li>
+    <li><img jiasrc="images/tea4.jpg" alt=""></li>
+</ul>
+
+<ul class="box" style="background: greenyellow">
+    <li><img jiasrc="images/tea1.jpg" alt=""></li>
+    <li><img jiasrc="images/tea2.jpg" alt=""></li>
+    <li><img jiasrc="images/tea3.jpg" alt=""></li>
+    <li><img jiasrc="images/tea4.jpg" alt=""></li>
+</ul>
+
+<ul class="box" style="background: teal">
+    <li><img jiasrc="images/tea1.jpg" alt=""></li>
+    <li><img jiasrc="images/tea2.jpg" alt=""></li>
+    <li><img jiasrc="images/tea3.jpg" alt=""></li>
+    <li><img jiasrc="images/tea4.jpg" alt=""></li>
+</ul>
+
+<ul class="box" style="background: sandybrown">
+    <li><img jiasrc="images/tea1.jpg" alt=""></li>
+    <li><img jiasrc="images/tea2.jpg" alt=""></li>
+    <li><img jiasrc="images/tea3.jpg" alt=""></li>
+    <li><img jiasrc="images/tea4.jpg" alt=""></li>
+</ul>
+
+
+<footer>我是底部</footer>
+
+<ul class="dingwei">
+    <li style="background: red">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+
+</body>
+</html>
+<script>
+    $(function () {
+        /*获取浏览器高度*/
+        let ch=$(window).height();
+        /*获取所有ul*/
+        let floors=$(".box");
+        /*初始化一个数组*/
+        let arr=[];
+        /*遍历ul，并且获取每一个到浏览器顶部的距离*/
+        floors.each(function (index,obj) {
+
+            /*方法一：利用jquery来做*/
+            // arr[index]=$(this).offset().top;
+
+            /*方法二：利用原生代码来做*/
+            arr[index]=this.offsetTop;
+        })
+
+        /*添加滚动事件*/
+        $(window).scroll(function () {
+            let stop=$(document.body).scrollTop();
+            /*$既可以遍历原生数组，也可以遍历对象*/
+            $.each(arr,function (index,value) {
+                if(stop+ch>arr[index]+200){
+                    let src=$("img",floors[index]);
+                    src.each(function (i,obj) {
+
+                        /*自定义属性用attr获取*/
+
+                        /*方法1：利用jquery来做*/
+                        // let jiasrc=$(this).attr("jiasrc");
+                        // $(this).prop("src",jiasrc)  
+
+
+                        /*方法二：利用原生代码来做*/
+                        let jiasrc=this.getAttribute("jiasrc");
+                        this.setAttribute("src",jiasrc); 
+
+                    })
+
+
+                }
+            })
+
+
+        })
+    })
+</script>
+

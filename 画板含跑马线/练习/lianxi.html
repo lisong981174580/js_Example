@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习</title>
+	<script src="js/function.js"></script>
+</head>
+<style>
+	#can,#can2,#can3,#can4,#can5,#can6{
+		background: #ccc;
+	}
+</style>
+<body>
+
+	<canvas id="can"  width="1200"  height="400"></canvas>
+	<canvas id="can2"  width="1200"  height="400"></canvas>
+	<canvas id="can3"  width="1200"  height="400"></canvas>
+	<canvas id="can4"  width="1200"  height="400"></canvas>
+	<canvas id="can5"  width="1200"  height="400"></canvas>
+	<canvas id="can6"  width="1600"  height="2000"></canvas>
+	<div class="body"></div>
+	
+</body>
+</html>
+
+<script>
+	var can=document.getElementById('can');
+	// console.log(can);
+	tex=can.getContext("2d");
+	// 用路径画矩形
+	
+
+	tex.beginPath();
+ 		tex.moveTo(20,20);
+ 		tex.lineTo(320,20);
+ 		tex.lineTo(320,320);
+ 		tex.lineTo(20,320);
+ 		tex.fillStyle="green";
+		tex.shadowOffsetX=10;
+		tex.shadowOffsetY=10;
+		tex.shadowBlur=10;
+		tex.shadowColor="yellow";
+
+	tex.closePath();
+
+	tex.fill();
+	tex.strokeStyle="yellow";
+	tex.stroke();
+	// tex.clearRect(0,0,can.offsetWidth,can.offsetHeight)
+
+// 等边三角形
+	tex.globalAlpha=0.5;
+ 	tex.beginPath();
+ 		tex.moveTo(700,20);
+ 		tex.lineTo(1000,320);
+ 		tex.lineTo(400,320);
+ 		
+	tex.closePath();
+	tex.fillStyle="red";
+	tex.fill();
+	tex.strokeStyle="#000";
+	tex.stroke();
+
+
+//画带圆角的矩形
+var can2=document.getElementById('can2');
+	// console.log(can);
+	tex2=can2.getContext("2d");
+	tex2.beginPath();
+ 		tex2.moveTo(40,20);
+ 		tex2.lineTo(320,20);
+ 		tex2.arcTo(350,20,350,50,30);
+ 		tex2.lineTo(350,350);
+ 		tex2.arcTo(350,380,320,380,30);
+ 		tex2.lineTo(40,380);
+ 		tex2.arcTo(10,380,10,350,30);
+ 		tex2.lineTo(10,50);
+ 		tex2.arcTo(10,20,40,20,30);
+ 		
+	tex2.closePath();
+	// tex2.fill();
+	tex2.stroke();
+
+
+	//贝塞尔曲线
+
+	tex2.beginPath();
+ 		tex2.moveTo(700,300);
+ 		tex2.quadraticCurveTo(950,100,1000,300) 
+ 		tex2.strokeStyle="red";
+		tex2.stroke();
+ 	tex2.closePath();
+	// tex2.fill();
+
+	
+
+	tex2.beginPath();
+	tex2.moveTo(700,300);
+	tex2.quadraticCurveTo(800,100,1000,300) 
+	tex2.strokeStyle="blue";
+	tex2.stroke();
+	tex2.closePath();
+	
+    tex2.beginPath();
+	tex2.moveTo(700,300);
+	tex2.bezierCurveTo(700,100,800,30,1000,300) 
+	tex2.strokeStyle="green";
+	tex2.stroke();
+	tex2.closePath();
+
+
+
+	//画圆
+	var can3=document.getElementById('can3');
+	// console.log(can);
+	tex3=can3.getContext("2d");
+
+  	tex3.beginPath();
+	// tex3.moveTo(800,200);
+    tex3.arc(800,200,100,0,2*Math.PI)
+	tex3.closePath();
+	tex3.strokeStyle="#000";
+	tex3.stroke();
+
+
+  	tex3.beginPath();
+	tex3.moveTo(200,200);
+    tex3.arc(200,200,100,0,1.5*Math.PI)
+	tex3.closePath();
+	tex3.strokeStyle="green";
+	tex3.stroke();
+
+
+ 	tex3.beginPath();
+	tex3.moveTo(500,200);
+    tex3.arc(500,200,100,0.5*Math.PI,0)
+	tex3.closePath();
+	tex3.strokeStyle="red";
+	tex3.stroke();
+
+
+    //画带圆角的矩形
+	var can4=document.getElementById('can4');
+	// console.log(can);
+	tex4=can4.getContext("2d");
+
+//线条样式
+	tex4.beginPath();
+	tex4.moveTo(30,30);
+	tex4.lineTo(200,30);
+	tex4.lineWidth=20;
+	tex4.lineCap="round" ;
+	tex4.stroke();
+	tex4.closePath();
+
+	tex4.beginPath();
+	tex4.moveTo(30,60);
+	tex4.lineTo(200,60);
+	tex4.lineWidth=20;
+	tex4.lineCap="butt" ;
+	tex4.stroke();
+	tex4.closePath();
+
+	tex4.beginPath();
+	tex4.moveTo(30,90);
+	tex4.lineTo(200,90);
+	tex4.lineWidth=20;
+	tex4.lineCap="square" ;
+	tex4.stroke();
+	tex4.closePath();
+
+//斜切长度
+var can5=document.getElementById("can5");
+var tex5=can5.getContext("2d");
+
+tex5.beginPath();
+tex5.moveTo(20,20);
+tex5.lineTo(100,200);
+tex5.lineTo(180,20);
+// tex5.lineCap="square";
+tex5.lineJoin="miter";
+tex5.miterLimit=0;  //斜切长度
+tex5.lineWidth=20;
+tex5.strokeStyle="red";
+tex5.stroke();
+tex5.closePath();
+
+
+//线性渐变
+tex5.beginPath();
+var lg=tex5.createLinearGradient(300,20,1100,20);
+lg.addColorStop(0,"red");
+lg.addColorStop(0.3,"green");
+lg.addColorStop(0.6,"yellow");
+lg.addColorStop(0.9,"pink");
+lg.addColorStop(1,"orange");
+
+tex5.fillStyle=lg;
+tex5.fillRect(300,20,800,200);
+tex5.closePath();
+
+//径向渐变
+var can6=document.getElementById("can6");
+var tex6=can6.getContext("2d");
+
+tex6.beginPath();
+var lg=tex6.createRadialGradient(300,300,0,300,300,200);
+lg.addColorStop(0,"red");
+lg.addColorStop(0.3,"green");
+lg.addColorStop(0.6,"yellow");
+lg.addColorStop(0.9,"pink");
+lg.addColorStop(1,"orange");
+
+tex6.fillStyle=lg;
+moveTo(300,300);
+tex6.arc(300,300,200,0,2*Math.PI);
+tex6.closePath();
+tex6.fill();
+
+
+//画图片   图片加载后执行 并且注意要把他作为填充对象   并且要有填充范围
+tex6.beginPath();
+var img=new Image();
+img.src="image/1.jpg";
+// var body=document.getElementsByClassName('body')[0];
+// console.log(body);
+// body.appendChild(img);
+img.onload=function(){
+    var Pattern=tex6.createPattern(img,"repeat"); 
+	tex6.fillStyle=Pattern;
+	tex6.fillRect(640,20,640,854);
+	
+	
+}
+tex6.closePath();
+
+
+//截图  注意：图片不能截
+	var tu=tex6.getImageData(20,20,640,854);
+	tex6.putImageData(tu,0,600,0,0,640,854);
+
+
+
+</script>

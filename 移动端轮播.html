@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script type="text/javascript">
+  	
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+   			
+   		});
+   		
+    </script>
+</head>
+<style>
+
+	body,ul,li{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}    
+	.box{
+		width: 100%;
+		height: 400px;
+		position: relative;
+		overflow: hidden;
+	}
+	.box ul{
+		width: 400%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		
+		transition:left .5s linear;
+		
+	}
+	
+	.box ul li{
+		
+		width: 25%;
+	    height: 100%;
+	    float: left;}
+	    
+	.box ul li:nth-child(1){
+		background: red;
+	}
+	
+	.box ul li:nth-child(2){
+		background: green;
+	}  
+	.box ul li:nth-child(3){
+		background: blue;
+	}
+	.box ul li:nth-child(4){
+		background: pink;
+	}
+	
+</style>
+
+
+<body>
+	<div class="box">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+</html>
+
+<script>
+	
+	var  ul=document.querySelectorAll("ul")[0];//获取大盒子
+	var  li=document.querySelectorAll("li"); //获取子元素
+	
+	var li_width=li[0].offsetWidth;  //获取子元素的宽度
+	
+	var num=0;  //页数，开始时为第0页
+    var dx=0;  //定义一个变量保存每次停下来的位置
+    
+    
+    //判断是否有这个属性
+    var flag = "ontouchstart" in window;
+	var moveStart;
+	var moveMove;
+	var moveEnd;
+	// 判断移动端事件还是pc端事件
+	if (flag) {
+		moveStart = "touchstart"
+		moveMove = "touchmove"
+		moveEnd = "touchend"
+	}else {
+		moveStart = "mousedown"
+		moveMove = "mousemove"
+		moveEnd = "mouseup"
+	}
+	
+	
+    //绑定触摸事件
+    ul.addEventListener(moveStart,function(e){
+    	
+    	//如果是pc端则  e  如果移动端则 e.touches[0]
+    	var e = flag?e.touches[0]:e;
+    	
+       	var stime=e.timeStamp;//一触摸就开始计时
+    	var utime;//定义一个  抬起时的时间变量
+    	
+    	
+    	
+    	ul.addEventListener(moveMove,move,false);  //绑定触摸后移动的事件
+    	ul.addEventListener(moveEnd,up,false);   //绑定抬起的事件
+    	
+    	
+    	var x1=e.clientX;    //记录开始的位置
+    	var x2;
+    	
+    
+    	
+    	function move(e){
+    		//如果是pc端则  e  如果移动端则 e.touches[0]
+    		var e = flag?e.touches[0]:e;
+    		
+    		x2=e.clientX;  //记录结束的位置
+    		ul.style.left=dx+x2-x1+"px";   //让元素跟着手指拖拽
+    	}
+    	
+    	
+    	function up(e){
+    		    	
+    		utime=e.timeStamp;   //记录抬起时的时间
+    		
+    	    //如果 移动了1/3或者 100毫秒内移动了100px则执行下面的程序
+    		if( Math.abs(x2-x1)>li_width/3 || ((utime-stime<100)&&((Math.abs(x2-x1))>100))){
+				
+				//如果两次差值大于0，则右移
+				if((x2-x1)>0){
+					num--;
+				};
+				//如果两次差值小于0，则左移
+				if((x2-x1)<0){
+					num++;
+				};
+				
+				//如果大于最后一张，则停在最后一张
+				if(num>li.length-1){
+					num=li.length-1;
+				}
+				//如果小于第一张则停在第一张
+				if(num<0){
+					num=0;
+				}
+				
+    		}
+    		
+    		//每次停下的位置
+    		ul.style.left=-num*li_width + "px";
+    		
+    		dx=-num*li_width;
+    		
+    		//取消这两个事件
+    		ul.removeEventListener(moveMove,move);
+    	    ul.removeEventListener(moveEnd,up);
+    	}
+    },false)
+	
+	
+</script>

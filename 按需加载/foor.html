@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按需加载</title>
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/animate.js"></script>
+</head>
+<style>
+    header,footer{
+        width: 100%;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        font-size: 30px;
+        background: #ccc;
+    }
+
+
+    .box{
+        width: 100%;
+        height: auto;
+        margin-bottom: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+    .box li{
+        width: 650px;
+        height: 443px;
+        margin: 30px 10px;;
+
+
+    }
+    .box li>img{
+        width: 650px;
+        height: 443px;
+        display: block;
+    }
+
+    .dingwei{
+        position: fixed;
+        width: 50px;
+        height: 250px;
+        left:30px;
+        top:calc(50% - 125px);
+    }
+
+    .dingwei li{
+        width: 100%;
+        height: 49px;
+        border-bottom: 1px solid #fff;
+        line-height: 48px;
+        text-align: center;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <header>我是头部</header>
+    <ul class="box" style="background: rebeccapurple">
+        <li><img jiasrc="images/tea1.jpg"  src="images/tea1.jpg" alt=""></li>
+        <li><img jiasrc="images/tea2.jpg"  src="images/tea1.jpg" alt=""></li>
+        <li><img jiasrc="images/tea3.jpg"  src="images/tea1.jpg" alt=""></li>
+        <li><img jiasrc="images/tea4.jpg"  src="images/tea1.jpg" alt=""></li>
+    </ul>
+
+    <ul class="box" style="background: yellow">
+        <li><img jiasrc="images/tea1.jpg" alt=""></li>
+        <li><img jiasrc="images/tea2.jpg" alt=""></li>
+        <li><img jiasrc="images/tea3.jpg" alt=""></li>
+        <li><img jiasrc="images/tea4.jpg" alt=""></li>
+    </ul>
+
+    <ul class="box" style="background: greenyellow">
+        <li><img jiasrc="images/tea1.jpg" alt=""></li>
+        <li><img jiasrc="images/tea2.jpg" alt=""></li>
+        <li><img jiasrc="images/tea3.jpg" alt=""></li>
+        <li><img jiasrc="images/tea4.jpg" alt=""></li>
+    </ul>
+
+    <ul class="box" style="background: teal">
+        <li><img jiasrc="images/tea1.jpg" alt=""></li>
+        <li><img jiasrc="images/tea2.jpg" alt=""></li>
+        <li><img jiasrc="images/tea3.jpg" alt=""></li>
+        <li><img jiasrc="images/tea4.jpg" alt=""></li>
+    </ul>
+
+    <ul class="box" style="background: sandybrown">
+        <li><img jiasrc="images/tea1.jpg" alt=""></li>
+        <li><img jiasrc="images/tea2.jpg" alt=""></li>
+        <li><img jiasrc="images/tea3.jpg" alt=""></li>
+        <li><img jiasrc="images/tea4.jpg" alt=""></li>
+    </ul>
+
+
+    <footer>我是底部</footer>
+
+    <ul class="dingwei">
+        <li style="background: red">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+</body>
+</html>
+<script>
+
+    /*页面加载后执行*/
+    window.onload=function () {
+       /*获取元素*/
+        var ul=document.querySelectorAll(".box");
+        var ch=window.innerHeight;
+        var dingwei=document.querySelectorAll(".dingwei li");
+       /*初始化*/
+        var arr=[];
+        var n=0;
+        var flag;/*定义一个开关，消除楼层跳转事件冲突的bug*/
+
+        /*获取每个ul到顶部浏览器顶部的距离，并且添加到数组arr中*/
+        for(var i=0;i<ul.length;i++){
+            var oh=ul[i].offsetTop;
+            arr.push(oh);
+        }
+
+        /*检测鼠标滚轮变化*/
+        window.onscroll=function(){
+            if(flag){
+                /*如果ture则停止事件*/
+                return ;
+            }
+        /*定义一个变量，记录竖直方向滚动条距离顶部的距离*/
+            var sTop=document.body.scrollTop;
+            /*遍历数组arr,如果 滚轮滚动的距离加上浏览器的高度大于元素距离浏览器顶部的距离，则页面加载*/
+            for(var i=0;i<arr.length;i++){
+                if(sTop+ch>arr[i]+200){
+
+                    var img=ul[i].querySelectorAll("img");
+                    for(var j=0;j<img.length;j++){
+                        img[j].src=img[j].getAttribute("jiasrc");
+                    }
+         /*定位的地方，实现和楼层对应的楼层变成红色*/
+                    dingwei.forEach(function (obj,index) {
+                        obj.style.background="#000";
+                    })
+                    dingwei[i].style.background="red";
+                }
+            }
+        }
+
+        /*遍历定位，添加点击事件，为了防止事件叠加，加了个开关*/
+        dingwei.forEach(function (obj,index) {
+            obj.onclick=function () {
+                flag=true;
+//               document.body.scrollTop=arr[index];
+                dingwei[n].style.background="#000";
+                this.style.background="red";
+                /*点击对应楼号，跳到对应楼层*/
+                animate(document.body,{scrollTop:arr[index]},function () {
+                    /*用n记录上一页*/
+                    n=index;
+                    flag=false;
+                });
+
+            }
+        })
+    }
+
+</script>
+

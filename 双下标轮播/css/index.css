@@ -1,0 +1,76 @@
+
+*{
+	padding: 0;
+	margin: 0;
+	
+}
+.banner{
+	width: 800px;
+	height: 500px;
+	border: 1px solid black;
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
+}
+
+.imgs{
+	width: 800px;
+	height: 500px;
+	position: relative;
+}
+.img{
+	width: 800px;
+	height: 500px;
+	position: absolute;
+	top: 0;left: 0;
+}
+.img:nth-child(1){
+	background: red;
+}
+.img:nth-child(2){
+	background: green;
+}
+.img:nth-child(3){
+	background: blue;
+}
+.img:nth-child(4){
+	background: yellow;
+}
+
+.btnbox{
+	width: 150px;
+	height: 20px;
+	position: absolute;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right: auto;
+	bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.btn{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	
+}
+
+
+.left,.right{
+	width: 50px;
+	height: 100px;
+	background: rgba(0,0,0,0.3);
+	position: absolute;
+	top: 0;
+	bottom:0;
+	margin-top:auto;
+	margin-bottom:auto;
+}
+.left{
+	left: 0;
+}
+.right{
+	right: 0;
+}

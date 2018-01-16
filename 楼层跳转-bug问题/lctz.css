@@ -1,0 +1,59 @@
+
+.list{
+	width: 50px;
+	height: 365px;
+	border: 1px solid black;
+	position: fixed;
+	top: 100px;
+	left: 100px;
+	display: none;
+}
+.li{
+	width: 100%;
+	height: 60px;
+	border-bottom: 1px solid #999;
+	color: #fff;
+	text-align: center;
+	line-height: 60px;
+	font-size: 24px;
+}
+.li:last-child{
+	border: 0;
+}
+.li1{
+	background: red;
+}
+.li2{
+	background: yellow;
+}
+.li3{
+	background: green;
+}
+.li4{
+	background: blue;
+}
+.li5{
+	background: purple;
+}
+.li6{
+	background: black;
+}
+.li.hui{
+	background: #555;
+}
+.banner{
+	width: 1000px;
+	height: 500px;
+	background: rgba(0,0,255,0.5);
+	margin: 0 auto;
+}
+.lc{
+	width: 1000px;
+	height: 500px;
+	margin: 20px auto;
+	border: 5px solid black;
+	box-sizing:border-box;
+	font-size: 50px;
+	text-align: center;
+	line-height: 400px;
+}

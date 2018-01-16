@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Drag </title>
+</head>
+<body>
+	<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		background: blue;
+		position: absolute;
+	}
+	</style>
+
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	
+</body>
+</html>
+<script>
+	
+	function Drag (obj) {
+
+		this.name=obj;
+	    this.cx = 0;
+		this.cy = 0;
+		this.ox = 0;
+		this.oy = 0;
+		this.down();
+	}
+
+	Drag.prototype = {
+
+		down:function(){
+			var that = this;//为防止下面使用this的时候指向事件源this.name
+			this.name.onmousedown=function(e){
+				that.ox = e.offsetX;
+				that.oy = e.offsetY;
+				that.move();
+				that.up();
+			}
+		},
+
+		move:function(){
+			var that = this;
+			document.onmousemove=function(e){
+				that.cx = e.clientX;
+				that.cy = e.clientY;
+				that.name.style.left=`${that.cx-that.ox}px`;
+				that.name.style.top=`${that.cy-that.oy}px`;
+			}
+		},
+
+		up:function(){
+			this.name.onmouseup=function(){
+				document.onmousemove = null;
+			}
+		}
+
+	}
+
+
+
+
+
+	var box = document.getElementsByClassName('box');
+
+	for (var i = 0; i < box.length; i++) {
+		new Drag(box[i]);
+	}
+
+
+
+
+</script>

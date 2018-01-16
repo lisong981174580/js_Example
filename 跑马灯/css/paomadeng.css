@@ -1,0 +1,70 @@
+.marqueeBox{
+    width: 1200px;
+    height: 180px;
+    background: #ccc;
+    margin: 0 auto;
+    position: relative;
+    padding: 10px  15px;
+    box-sizing: border-box;
+}
+
+.marquee{
+    width: 1170px;
+    height: 160px;
+    overflow: hidden;
+}
+
+.box{
+    width: 1770px;
+    height: 160px;
+
+
+}
+
+.list{
+    width: 285px;
+    height: 160px;
+    margin-right: 10px;
+    float: left;
+}
+
+.l1{
+    background: red;
+}
+.l2{
+    background: blue;
+}
+
+.l3{
+    background: green;
+}
+
+.l4{
+    background: orange;
+}
+
+.l5{
+    background: yellow;
+}
+.l6{
+    background: pink;
+}
+.right,.left{
+    width: 40px;
+    height: 80px;
+    position: absolute;
+    top: 50px;
+    background: rgba(0,0,0,0.3);
+}
+.right{
+     right: 0;
+ }
+
+.left{
+    left: 0;
+}
+
+.right:hover,.left:hover{
+    background: rgba(0,0,0,0.7);
+
+}

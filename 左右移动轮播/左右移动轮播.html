@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>遮罩选项卡</title>
+    <script src="js/function.js"></script>
+    <script src="js/animate.js"></script>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        /*左右移动轮播*/
+        .box{
+            width:800px;
+            height:500px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .contentbox{
+            width:4000px;
+            height:500px;
+        }
+        .content{
+            width:800px;
+            height:500px;
+            float: left;
+        }
+        .content:nth-child(1){
+            background: red;
+        }
+        .content:nth-child(2){
+            background: green;
+        }
+        .content:nth-child(3){
+            background: yellow;
+        }
+        .content:nth-child(4){
+            background: blue;
+        }
+        .content:nth-child(5){
+            background: red;
+        }
+        .anbox{
+            width:200px;
+            height:50px;
+            position: absolute;
+            left: 300px;
+            bottom: 10px;
+        }
+        .an{
+            width:30px;
+            height:30px;
+            background: #000;
+            border-radius: 50%;
+            float: left;
+            margin: 0 8px;
+        }
+        .an:first-child{
+            background: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<!--左右移动轮播-->
+<div class="box">
+    <div class="contentbox">
+        <div class="content"></div>
+        <div class="content"></div>
+        <div class="content"></div>
+        <div class="content"></div>
+        <div class="content"></div>
+    </div>
+    <div class="anbox">
+        <div class="an"></div>
+        <div class="an"></div>
+        <div class="an"></div>
+        <div class="an"></div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    //左右移动轮播：
+     $(function () {
+        var content_Box = $(".contentbox")[0];
+        var content = $(".content");
+        var box=$(".box")[0];
+        var anbox=$(".anbox")[0]
+        var an=$(".an")
+        var num = 0;
+        var t;
+        var s;
+             t = setInterval(move, 2000);
+        function move() {
+            if(num==0){
+                an[num].style.background="#fff";
+            }
+            num++;
+            animate(content_Box, {marginLeft: -800 * num}, function () {
+                console.log(num);
+                console.log(content.length);
+                console.log(getStyle(content_Box, "marginLeft"));
+                if (num == content.length - 1) {
+                    num = 0;
+                    content_Box.style.marginLeft = 0;
+                }
+                for(let i=0;i<an.length;i++){
+                    an[i].style.background="#000";
+                }
+                an[num].style.background="#fff";
+            })
+
+         }
+            box.onmouseover=function () {
+                clearInterval(t)
+            }
+            box.onmouseout=function () {
+                t = setInterval(move, 2000);
+            }
+                for(let i=0;i<an.length;i++){
+                    an[i].onmouseover=function () {
+                        num=i-1;
+                       s=setTimeout(move,500);
+
+                    }
+                    an[i].onmouseout=function () {
+                        clearTimeout(s);
+                    }
+                }
+     })
+
+
+</script>

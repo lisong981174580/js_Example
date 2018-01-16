@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滑动门</title>
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/jquery-3.2.1.js"></script>
+</head>
+
+<style>
+    .box{
+        width: 800px;
+        height: 443px;
+        margin: 0 auto;
+        margin-top: 40px;
+        border: 2px solid red;
+        overflow: hidden;
+
+    }
+    .box>ul{
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+
+    }
+    .box>ul>li{
+        width: 650px;
+        height: 443px;
+        position: absolute;
+        top:0;
+        transition: all 0.5s;
+
+
+    }
+
+    .box>ul>li>img{
+        width: 650px;
+        height: 443px;
+        display: block;
+
+    }
+
+</style>
+<body>
+<div class="box">
+    <ul>
+        <li  style="left:0">
+            <img src="images/tea1.jpg" alt="">
+        </li>
+        <li  style="left:650px">
+            <img src="images/tea2.jpg" alt="">
+        </li>
+        <li style="left:700px">
+            <img src="images/tea3.jpg" alt="">
+        </li>
+        <li style="left:750px">
+            <img src="images/tea4.jpg" alt="">
+        </li>
+    </ul>
+
+
+</div>
+
+</body>
+</html>
+
+<script>
+    $(function () {
+
+        let lis=$(".box>ul>li");
+        let box_w=$(".box").width();
+        let li_w=lis.width();
+        /*根据结构获取数组的长度并且减一*/
+        let n=lis.length-1;
+        /*把剩余空间均分*/
+        let p_w=(box_w-li_w)/n;
+
+        /*初始化*/
+        /*方法一：直接给css传一个回调函数*/
+      /*  lis.css({left:function (index,value) {
+            if(index==0)  return  0;
+            return  li_w+(index-1)*p_w;
+        }})
+      */
+
+        /*方法二：遍历*/
+
+        lis.each(function (index,value) {
+            if(index==0){
+                $(this).css({
+                    left:0,
+                    opacity: 1
+
+                })
+            }else{
+                $(this).css({
+                    /*根据规律，剩下的应该为li的宽度，加上下标减一再乘上平均宽度*/
+                    left:li_w+(index-1)*p_w,
+                    opacity: 0.9
+                })
+            }
+        })
+        /*给每一个li添加点击事件*/
+        lis.click(function (index,value) {
+            /*获取每个元素的下标*/
+            let i=$(this).index();
+
+
+            /*点击后再进行遍历一次，左边的left设为 index*p_w，右边的设为 li_w+(index-1)*p_w*/
+            lis.each(function (index,value) {
+                if(index<=i){
+                   $(this).animate({left:index*p_w})
+                }else{
+                    $(this).animate({left:li_w+(index-1)*p_w})
+                }
+                $(this).css({
+                    opacity: 0.4
+                })
+            })
+
+            $(this).css({
+                opacity: 1
+            })
+        })
+    })
+</script>
